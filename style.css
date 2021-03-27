@@ -116,7 +116,7 @@ li > label {
   width: 226px;
 }
 li > input[type="text"] {
-  width: 226px
+  width: 226px;
 }
 li > .delete:hover {
   color: #cf2323;
@@ -132,13 +132,13 @@ li > .delete:hover {
 
 /* Completed */
 #checked label {
-  text-decoration: line-through
+  text-decoration: line-through;
     color: #888;
 }
 
 /* Edit Task */
 ul li input[type="text"] {
-  display: none
+  display: none;
 }
 
 .editMode input[type="text"] {
