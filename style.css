@@ -84,11 +84,6 @@
   padding: 0px;
   list-style: none;
 }
-/* Heading */
-/* New Task */
-/* Task list */
-/* Completed */
-/* Edit Task */
 .list__item {
   overflow: hidden;
   padding: 20px 0;
@@ -112,10 +107,10 @@
   text-decoration: line-through;
   color: #888;
 }
-.editMode input[type="text"] {
+.section__input_position {
   display: inline-block;
-  width: 224px;
+  width: 222px;
 }
-.editMode label {
+.section__label_visible {
   display: none;
 }

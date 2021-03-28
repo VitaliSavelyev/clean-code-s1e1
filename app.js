@@ -42,7 +42,7 @@ var createNewTaskElement=function(taskString){
     editInput.className="section__input";
 
     editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className="edit section__button";
+    editButton.className="section__button section__button_change";
 
     deleteButton.innerText="Delete";
     deleteButton.className="section__button section__button_color_r";
@@ -86,24 +86,50 @@ var editTask=function(){
 
     var listItem=this.parentNode;
 
-    var editInput=listItem.querySelector('input[type=text]');
+    var editInput=listItem.querySelector(".section__input");
+    var chekboxInput=listItem.querySelector(".section__input_chekbox");
     var label=listItem.querySelector("label");
-    var editBtn=listItem.querySelector(".edit");
-    var containsClass=listItem.classList.contains("editMode");
+    var editBtn=listItem.querySelector(".section__button_change");
+    var containsClass=listItem.querySelector(".section__input_position");
     //If class of the parent is .editmode
-    if(containsClass){
+    console.log(chekboxInput.checked);
+    console.log(containsClass);
+    if(chekboxInput.checked){
+        if(containsClass){
+            console.log(1)
+            //switch to .editmode
+            //label becomes the inputs value.
+            label.innerText=editInput.value;
+            label.className="section__label section__label_text";
+            editInput.className="section__input";
+            editBtn.innerText="Edit";
+        }else{
+            console.log(2)
+            editInput.value=label.innerText;
+            label.className="section__label section__label_visible";
+            editInput.className="section__input section__input_position section__input_text";
+            editBtn.innerText="Save";
+        }    
+    } else {
+        if(containsClass){
 
-        //switch to .editmode
-        //label becomes the inputs value.
-        label.innerText=editInput.value;
-        editBtn.innerText="Edit";
-    }else{
-        editInput.value=label.innerText;
-        editBtn.innerText="Save";
+            //switch to .editmode
+            //label becomes the inputs value.
+            label.innerText=editInput.value;
+            label.className="section__label";
+            editInput.className="section__input";
+            editBtn.innerText="Edit";
+        }else{
+            editInput.value=label.innerText;
+            label.className="section__label section__label_visible";
+            editInput.className="section__input section__input_position";
+            editBtn.innerText="Save";
+        }
     }
 
+
     //toggle .editmode on the parent.
-    listItem.classList.toggle("editMode");
+    //containsClass.classList.toggle(".section__input_position");
 };
 
 
@@ -126,6 +152,9 @@ var taskCompleted=function(){
     //Append the task list item to the #completed-tasks
     var listItem=this.parentNode;
     completedTasksHolder[0].appendChild(listItem);
+    console.log(completedTasksHolder[0]);
+    //var editInput=listItem.querySelector(".section__input");
+    //editInput.className="section__input section__input_position";
     var label=listItem.querySelector("label");
     label.className="section__label section__label_text";
     bindTaskEvents(listItem, taskIncomplete);
@@ -140,6 +169,9 @@ var taskIncomplete=function(){
     //Append the task list item to the #incompleteTasks.
     var listItem=this.parentNode;
     incompleteTaskHolder[0].appendChild(listItem);
+    //console.log(incompleteTaskHolder[0]);
+    //var editInput=listItem.querySelector(".section__input");
+    //editInput.className="section__input";
     var label=listItem.querySelector("label");
     label.className="section__label";
     bindTaskEvents(listItem,taskCompleted);
@@ -164,7 +196,7 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
     console.log("bind list item events");
 //select ListItems children
     var checkBox=taskListItem.querySelector("input[type=checkbox]");
-    var editButton=taskListItem.querySelector("button.edit");
+    var editButton=taskListItem.querySelector("button.section__button_change");
     var deleteButton=taskListItem.querySelector("button.section__button_color_r");
 
 
